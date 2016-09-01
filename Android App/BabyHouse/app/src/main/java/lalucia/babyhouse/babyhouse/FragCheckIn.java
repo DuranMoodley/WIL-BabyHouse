@@ -1,5 +1,6 @@
 package lalucia.babyhouse.babyhouse;
 
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -11,34 +12,46 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
 
-public class StaffCheckIn extends AppCompatActivity {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class FragCheckIn extends Fragment implements View.OnClickListener{
 
     TextView addressTexttv;
     Geocoder objCoder;
     String provider;
     LocationManager objLocationManager;
     Location objLocation;
+    View view;
+    Button locationbtn;
 
+    public FragCheckIn() {
+        // Required empty public constructor
+    }
+    //**********************************************************************************************
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_staff_check_in);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        addressTexttv = (TextView) findViewById(R.id.tvAddress);
-        objLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_frag_check_in, container, false);
+        addressTexttv = (TextView) view.findViewById(R.id.tvAddress);
+        objLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationbtn = (Button) view.findViewById(R.id.btnCheckInVolunteer);
         provider = LocationManager.NETWORK_PROVIDER;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        locationbtn.setOnClickListener(this);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -46,9 +59,10 @@ public class StaffCheckIn extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+            //return;
         }
-        objLocationManager.requestLocationUpdates(provider, 1000, 0, new LocationListener() {
+        objLocationManager.requestLocationUpdates(provider, 1000, 0, new LocationListener()
+        {
             @Override
             public void onLocationChanged(Location location) {
 
@@ -62,29 +76,30 @@ public class StaffCheckIn extends AppCompatActivity {
             @Override
             public void onProviderEnabled(String provider)
             {
-                Toast.makeText(StaffCheckIn.this, "Location Settings On", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Location Settings On", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onProviderDisabled(String provider)
             {
-                Toast.makeText(StaffCheckIn.this, "Location Setting Off", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Location Setting Off", Toast.LENGTH_SHORT).show();
             }
         });
+        return view;
     }
     //****************************************************************************************
-    public void btnClick(View v)
-    {
+    @Override
+    public void onClick(View v) {
         RetrieveLocation objAddress = new RetrieveLocation();
         objAddress.execute(objLocation);
     }
-    //*********************************************************************************************************
+    //****************************************************************************************
     public class RetrieveLocation extends AsyncTask<Location, Void, String>
     {
         @Override
         protected void onPreExecute()
         {
-            Toast.makeText(getApplication(), "Finding Your Location....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Finding Your Location....", Toast.LENGTH_SHORT).show();
         }
         //***************************************************************************
         @Override
@@ -93,15 +108,9 @@ public class StaffCheckIn extends AppCompatActivity {
             String myAddress = "";
             if (Geocoder.isPresent())
             {
-                objCoder = new Geocoder(getApplicationContext());
-                if (ActivityCompat.checkSelfPermission(StaffCheckIn.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(StaffCheckIn.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+                objCoder = new Geocoder(getActivity());
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
                     return "";
                 }
 

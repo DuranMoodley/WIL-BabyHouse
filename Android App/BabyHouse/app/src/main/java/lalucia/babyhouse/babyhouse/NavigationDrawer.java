@@ -36,7 +36,6 @@ public class NavigationDrawer extends Fragment implements MenuAdapter.RecycleCli
     private boolean drawerExisted;
     private boolean savedInstanceStatedrawer;
 
-
     public NavigationDrawer() {
         // Required empty public constructor
     }
@@ -54,7 +53,7 @@ public class NavigationDrawer extends Fragment implements MenuAdapter.RecycleCli
     public List<MenuItems> getData()
     {
        List<MenuItems> menuList = new ArrayList<>();
-       String [] arrMenuItems = {"Check In","Create Blog","Gallery","Donations","Events"};
+       String [] arrMenuItems = {"Wish List","Our Team","Blog"};
 
         for(int count = 0 ; count < arrMenuItems.length; count++)
         {
@@ -137,21 +136,15 @@ public class NavigationDrawer extends Fragment implements MenuAdapter.RecycleCli
         Intent newActivity = new Intent();
         if (position == 0)
         {
-            newActivity = new Intent(getActivity(), StaffCheckIn.class);
+            newActivity = new Intent(getActivity(), WishList.class);
         }
         else if(position == 1)
         {
-            newActivity = new Intent(getActivity(), BlogPosts.class);
+            newActivity = new Intent(getActivity(), OurTeam.class);
         }
         else if(position == 2)
         {
-            newActivity = new Intent(getActivity(), Gallery.class);
-        }
-        else if(position == 3){
-            newActivity = new Intent(getActivity(), DonationDetails.class);
-        }
-        else if(position == 4){
-            newActivity = new Intent(getActivity(), Events.class);
+            newActivity = new Intent(getActivity(), BlogPosts.class);
         }
 
 

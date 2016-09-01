@@ -7,8 +7,11 @@
     <string name="title_activity_menu_screen">Menu</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_donation_details">Donation Details</string>
-    <string name="title_activity_blog_posts">Create Blog Posts</string>
+    <string name="title_activity_blog_posts">Blog</string>
     <string name="title_activity_gallery">Gallery</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_closed">Closed</string>
+    <string name="title_activity_our_team">OurTeam</string>
+    <string name="title_activity_wish_list">WishList</string>
+
 </resources>

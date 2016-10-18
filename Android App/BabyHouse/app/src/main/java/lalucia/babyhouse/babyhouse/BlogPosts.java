@@ -31,6 +31,7 @@ public class BlogPosts extends AppCompatActivity {
         setContentView(R.layout.activity_blog_posts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         blogHeading = (EditText) findViewById(R.id.edtHeading);
         blogBody = (EditText) findViewById(R.id.edtBody);
@@ -54,7 +55,7 @@ public class BlogPosts extends AppCompatActivity {
             HttpURLConnection urlConnection = null;
             try {
                 //Create connection to the url
-                URL url = new URL("http://www.duran.dx.am/blog.php");
+                URL url = new URL("http://www.babyhouse.dx.am/blogAndroid.php");
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);

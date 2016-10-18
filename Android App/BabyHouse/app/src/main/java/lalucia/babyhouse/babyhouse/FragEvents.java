@@ -1,12 +1,28 @@
 package lalucia.babyhouse.babyhouse;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.ArrayList;
 
 
 /**
@@ -15,7 +31,7 @@ import android.widget.TextView;
 public class FragEvents extends Fragment
 {
     private View view;
-    private TextView eventstv;
+    private ListView eventlist;
     //*********************************************************
     public FragEvents()
     {
@@ -27,7 +43,77 @@ public class FragEvents extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_frag_events, container, false);
-        eventstv = (TextView) view.findViewById(R.id.tvEvents);
+        eventlist = (ListView) view.findViewById(R.id.lstEvents);
+        new RetrieveEventsListData().execute();
         return view;
+    }
+    //*********************************************************
+    public class RetrieveEventsListData extends AsyncTask<String,Void,String>
+    {
+        ArrayList objListOfEvents = new ArrayList<>();
+        @Override
+        protected String doInBackground(String... params)
+        {
+            String line = "";
+            String entireLine = "";
+            JSONObject jsonObject;
+            JSONArray jsonArray;
+            HttpURLConnection urlConnection = null;
+            String eventListData = "";
+
+            URL url;
+            try {
+                url = new URL("http://www.babyhouse.dx.am/eventandroidbabyhouse.php");
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setDoInput(true);
+                urlConnection.setDoOutput(true);
+
+                BufferedReader objread = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                while ((line = objread.readLine()) != null) {
+                    entireLine += line;
+                }
+
+                //Get json elements
+                jsonObject = new JSONObject(entireLine);
+                jsonArray = jsonObject.optJSONArray("eventslist");
+
+                for(int count = 0 ; count < jsonArray.length();count++)
+                {
+                    JSONObject jsonEventData = jsonArray.getJSONObject(count);
+                    eventListData = "Title :\t" + jsonEventData.optString("event_title") + "\n" +
+                                    "Type of Event:\t" + jsonEventData.optString("event_description") + "\n" +
+                                    "Date:\t" + jsonEventData.optString("event_date");
+                    objListOfEvents.add(eventListData);
+                }
+                objread.close();
+                return eventListData;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return "Nothing Returned!!";
+        }
+        //**********************************************************************
+        @Override
+        protected void onPostExecute(String s)
+        {
+            if(s.trim().equalsIgnoreCase("Nothing Returned!!"))
+            {
+                Toast.makeText(getActivity(),R.string.error_message,Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, objListOfEvents);
+                eventlist.setAdapter(arrAdapter);
+            }
+        }
     }
 }

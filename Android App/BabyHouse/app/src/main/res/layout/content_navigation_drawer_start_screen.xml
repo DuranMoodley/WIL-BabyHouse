@@ -9,21 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="lalucia.babyhouse.babyhouse.WishList"
-    tools:showIn="@layout/activity_wish_list">
+    tools:context="lalucia.babyhouse.babyhouse.NavigationDrawerStartScreen"
+    tools:showIn="@layout/app_bar_navigation_drawer_start_screen">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrWishList" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/tvWishList"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-    </ScrollView>
 
 </RelativeLayout>

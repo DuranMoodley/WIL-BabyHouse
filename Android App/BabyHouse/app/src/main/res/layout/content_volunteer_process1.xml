@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="lalucia.babyhouse.babyhouse.VolunteerProcess1"
+    tools:showIn="@layout/activity_volunteer_process1">
+
+
+    <!--NestedScrollView Holds linearLayout-->
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/NestedscrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/myCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:background="#ffffff"
+                android:elevation="10dp"
+                app:cardCornerRadius="4dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFF"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="Volunteer Program"
+                        android:textSize="24dp"
+                        android:id="@+id/txtVolProg" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="In order to get you started we require a few things so that we can get to know you better. This may seem dull and unnecessary but we know that you will understand that our babies are very special and we need to ensure their safety and well being. Let’s get started"
+                        android:id="@+id/txtQqq"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\n 1. Please complete the attached volunteer information sheet and return to us either by email to sheila@babyhouse.org.za or drop off at The La Lucia Baby House."
+                        android:textStyle="italic"
+                        android:id="@+id/txtStep1"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\n 2. Provide proof of a police clearance less than 6 months old. A clearance can be done at any police station, or by appointment with Lorraine at MPC Recruitment on 82 Armstrong Avenue, La Lucia. Her number is 031 562 8001 and let her know you are from The Baby House. All you need to do is go to their offices with your ID book and fingers (for prints!) and they will forward the results to us."
+                        android:textStyle="italic"
+                        android:id="@+id/txtStep2"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\n 3. Take a look at the list of tasks and let us know which ones you would like to get involved with: Playtime? Exercise? Bathing? Feeding? Clinic visits? Occupational Therapy? Cooking of baby foods? Fundraising and donations? Photography? Medical practitioner? Sorting donations? Breast Milk Bank(promoting, pasturising milk, collecting milk from moms)"
+                        android:textStyle="italic"
+                        android:id="@+id/txtStep3"
+
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="\n 4. Once we have received your application and police clearance you are on your way to being an integral part of transforming babies’ lives. Let us know when you are available to start!"
+                        android:textStyle="italic"
+                        android:id="@+id/txtStep4"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\n To get the Volunteer Application click the download button on the top right"
+                        android:textStyle="italic"
+                        android:id="@+id/txtgetForm"
+
+                        />
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.v4.widget.NestedScrollView>

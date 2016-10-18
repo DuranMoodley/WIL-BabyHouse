@@ -9,9 +9,37 @@
     <string name="title_activity_donation_details">Donation Details</string>
     <string name="title_activity_blog_posts">Blog</string>
     <string name="title_activity_gallery">Gallery</string>
+    <string name="title_activity_volunteer">Volunteer Program</string>
+    <string name="title_activity_adoption">Adoption Process</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_closed">Closed</string>
-    <string name="title_activity_our_team">OurTeam</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_our_team">Our Team</string>
     <string name="title_activity_wish_list">WishList</string>
+    <string name="title_activity_register_screen">Register</string>
+    <string name="title_activity_donation_screen">Donations</string>
+    <string name="error_message">Sorry, A problem has occurred. Please Restart Application.</string>
+    <string name="error_message_empty_name">Please Enter in Your Name</string>
+    <string name="error_message_empty_surname">Please Enter in Your Surname</string>
+    <string name="error_message_empty_email">Please Enter in Your Email Address</string>
+    <string name="error_message_empty_contactnumber">Please Enter in Your Contact Number</string>
+    <string name="error_message_empty_password">Please Enter in a Password</string>
+    <string name="error_message_empty_contactnumber_small">Contact Number must be 10 Digits</string>
+    <string name="HomeFragmentContent">The LaLucia Baby House is a transitional home for abandoned babies. But we are much more than an orphanage. We are all about adoption! Our role is to love and care for the babies and prepare them for their forever families. Our goal is that they are with their new families before their first birthday.
+    All of our babies come to us through the Adoption Team at Durban Child Welfare. Each baby has it’s own social worker who is working to match them with adoptive families.
 
+We can take up to 6 babies at a time and most of them are under 1 year of age. We have an experienced, hardworking group of care-givers who care for the babies 24 hours a day</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_donations_landscape">DonationsLandscape</string>
+    <string name="title_activity_detailed_activity_donations">DetailedActivityDonations</string>
+    <string name="title_activity_donation_detail">DonationDetail</string>
+    <string name="title_activity_navigation_drawer_start_screen">NavigationDrawerStartScreen
+    </string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_maps">Contact Us</string>
+    <string name="title_activity_baby_house_map">Map</string>
+    <string name="title_activity_volunteer_check_in">VolunteerCheckIn</string>
 </resources>

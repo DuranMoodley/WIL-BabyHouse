@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="Edit">
+            <menu>
+                <item
+                    android:id="@+id/nav_adoption"
+                    android:icon="@mipmap/adoption"
+                    android:title="Adoption Process" />
+                <item
+                    android:id="@+id/nav_volunteer"
+                    android:icon="@mipmap/volunteerprogram"
+                    android:title="Volunteer Program" />
+                <item
+                    android:id="@+id/nav_our_team"
+                    android:icon="@mipmap/ourteam"
+                    android:title="@string/title_activity_our_team" />
+            </menu>
+        </item>
+    </group>
+
+    <item android:title="Help Us">
+        <menu>
+            <item
+                android:id="@+id/nav_donations"
+                android:icon="@mipmap/donation"
+                android:title="@string/title_activity_donation_screen" />
+            <item
+                android:id="@+id/nav_wishlist"
+                android:icon="@mipmap/wishlist"
+                android:title="@string/title_activity_wish_list" />
+            <item
+                android:id="@+id/nav_our_events"
+                android:icon="@mipmap/events"
+                android:title="@string/title_activity_events" />
+        </menu>
+    </item>
+    <item android:title="Volunteer">
+        <menu>
+            <item
+                android:id="@+id/nav_blog"
+                android:icon="@mipmap/blogg"
+                android:title="@string/title_activity_blog_posts" />
+            <item
+                android:id="@+id/nav_checkin"
+                android:icon="@mipmap/checkin"
+                android:title="@string/title_activity_staff_check_in" />
+        </menu>
+    </item>
+    <item android:title="Contact Us">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@mipmap/phonefab"
+                android:title="@string/title_activity_maps" />
+        </menu>
+    </item>
+</menu>

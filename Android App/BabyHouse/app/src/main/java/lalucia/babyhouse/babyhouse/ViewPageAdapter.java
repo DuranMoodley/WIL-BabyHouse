@@ -13,12 +13,15 @@ public class ViewPageAdapter extends FragmentStatePagerAdapter{
         super(fm);
         pageTitles = titles;
         numberOfPages = pages;
+
     }
     //***************************************************************************************
     @Override
     public Fragment getItem(int position)
     {
+
         FragHome home = new FragHome();
+        //String isVol = myprefs.getString("Check In", false);
         if(position == 0)
         {
             return home;
@@ -30,7 +33,7 @@ public class ViewPageAdapter extends FragmentStatePagerAdapter{
         }
         else if(position == 2)
         {
-            FragDonate donate = new FragDonate();
+            MasterFragmentDonations donate = new MasterFragmentDonations();
             return donate;
         }
         else if(position == 3)

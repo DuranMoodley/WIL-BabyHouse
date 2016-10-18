@@ -55,14 +55,10 @@ public class StartScreen extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.title_activity_help)
         {
-            newActivity = new Intent(StartScreen.this, Help.class);
+            newActivity = new Intent(StartScreen.this, HelpScreen1.class);
             startActivity(newActivity);
         }
-        else if(id == R.id.title_activity_blog)
-        {
-            newActivity = new Intent(StartScreen.this,BlogPosts.class);
-            startActivity(newActivity);
-        }
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class NavigationDrawer extends Fragment implements MenuAdapter.RecycleCli
     public List<MenuItems> getData()
     {
        List<MenuItems> menuList = new ArrayList<>();
-       String [] arrMenuItems = {"Wish List","Our Team","Blog"};
+       String [] arrMenuItems = {"Wish List","Our Team","Blog","Donations","Volunteer Program","Staff","Adoption Process"};
 
         for(int count = 0 ; count < arrMenuItems.length; count++)
         {
@@ -136,7 +137,7 @@ public class NavigationDrawer extends Fragment implements MenuAdapter.RecycleCli
         Intent newActivity = new Intent();
         if (position == 0)
         {
-            newActivity = new Intent(getActivity(), WishList.class);
+            newActivity = new Intent(getActivity(), WishListProcess1.class);
         }
         else if(position == 1)
         {
@@ -146,8 +147,22 @@ public class NavigationDrawer extends Fragment implements MenuAdapter.RecycleCli
         {
             newActivity = new Intent(getActivity(), BlogPosts.class);
         }
-
-
+        else if(position == 3)
+        {
+            newActivity = new Intent(getActivity(),DonationScreen.class);
+        }
+        else if(position == 4)
+        {
+            newActivity = new Intent(getActivity(),VolunteerProcess1.class);
+        }
+        else if(position == 5)
+        {
+            Toast.makeText(getActivity(),"Under Constructions",Toast.LENGTH_SHORT).show();
+        }
+        else if(position == 6)
+        {
+            newActivity = new Intent(getActivity(),AdoptionProcess1.class);
+        }
         startActivity(newActivity);
     }
 }

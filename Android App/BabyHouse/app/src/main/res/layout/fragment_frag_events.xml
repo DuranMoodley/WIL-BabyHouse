@@ -6,17 +6,10 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrEvents" >
+        android:layout_height="452dp"
+        android:id="@+id/lstEvents"
+        android:layout_gravity="center_horizontal|top" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Events Db"
-            android:id="@+id/tvEvents"
-            android:layout_gravity="center_horizontal|top" />
-    </ScrollView>
 </FrameLayout>

@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,10 +14,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity
-            android:name=".StartScreen"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
             android:label="@string/app_name"
@@ -29,11 +27,7 @@
         <activity
             android:name=".BlogPosts"
             android:label="@string/title_activity_blog_posts"
-            android:parentActivityName=".NavigationDrawerStartScreen"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Gallery"
-            android:label="@string/title_activity_gallery"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OurTeam"
@@ -47,7 +41,7 @@
             android:name=".DonationScreen"
             android:configChanges="orientation"
             android:label="@string/title_activity_donation_screen"
-            android:parentActivityName=".NavigationDrawerStartScreen"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DonationsLandscape"
@@ -56,39 +50,32 @@
         <activity
             android:name=".DonationDetail"
             android:configChanges="orientation"
+            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_donation_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AdoptionProcess1"
+            android:name=".AdoptionProcess"
             android:label="@string/title_activity_adoption"
-            android:parentActivityName=".NavigationDrawerStartScreen"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HelpScreen1"
+            android:name=".HelpInformation"
             android:label="@string/title_activity_help"
-            android:parentActivityName=".NavigationDrawerStartScreen"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".VolunteerProcess1"
+            android:name=".VolunteerProcess"
             android:label="@string/title_activity_volunteer"
-            android:parentActivityName=".NavigationDrawerStartScreen"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".HomeProcess1"
-            android:label="@string/title_activity_help"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".NavigationDrawerStartScreen"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".WishListProcess1"
+            android:name=".WishListInformation"
             android:label="@string/title_activity_wish_list"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -102,7 +89,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyA7e9KJObb3hFA1VsU80osaSSufgnVK4qU" />
 
         <activity
             android:name=".BabyHouseMap"
@@ -110,7 +97,19 @@
         <activity
             android:name=".VolunteerCheckIn"
             android:label="@string/title_activity_volunteer_check_in"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Events"
+            android:label="@string/title_activity_events"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <service
+            android:name=".GeofenceTransitionIntentService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

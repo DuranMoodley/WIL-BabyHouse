@@ -1,3 +1,10 @@
+/*
+DonationDetail.java
+Show Donation Details to the user
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
 
 import android.content.res.Configuration;
@@ -29,6 +36,8 @@ public class DonationDetail extends AppCompatActivity {
         String name = getIntent().getStringExtra("name");
         donationtv = (TextView) findViewById(R.id.tvSelectedItem);
         zapperImg = (ImageView) findViewById(R.id.imgZapper);
+
+        //Checks what value the user has selected in the master fragment
         if(name.equalsIgnoreCase("ZAPPER"))
         {
             showZapper();
@@ -41,12 +50,14 @@ public class DonationDetail extends AppCompatActivity {
     //********************************************************************************
     public void showZapper()
     {
+        //Set images to show if Zapper button is selected on the Master Fragment
         zapperImg.setVisibility(View.VISIBLE);
         donationtv.setVisibility(View.INVISIBLE);
     }
     //********************************************************************************
     public void showEft()
     {
+        //Show eft details if the Eft options is Selected in the Master Fragment
         zapperImg.setVisibility(View.INVISIBLE);
         FactoryClass objFactory = new FactoryClass(this);
         String donationText = objFactory.readDate("donations");

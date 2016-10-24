@@ -62,7 +62,7 @@ public class TabFragment extends Fragment {
         public Fragment getItem(int position)
         {
             switch (position){
-                case 0 : return new HomeFragmentProcess1();
+                case 0 : return new FragHome();
                 case 1 : return new MasterFragmentDonations();
                 case 2 : return new FragEvents();
             }
@@ -94,5 +94,4 @@ public class TabFragment extends Fragment {
             return null;
         }
     }
-
 }

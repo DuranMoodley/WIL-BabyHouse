@@ -1,3 +1,10 @@
+/*
+RegisterScreenjava
+Allows a user to register to the baby house, details will be sent to the Online Database
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
 
 import android.content.Intent;
@@ -36,16 +43,17 @@ public class RegisterScreen extends AppCompatActivity {
         setSupportActionBar(toolbar);
         initialize();
     }
-
     //*************************************************************
     public void RegisterButtonClick(View v)
     {
+        //Instantiate object and validate input data from fields
         Person objPerson = new Person(nameedt.getText().toString().trim(),
                                      surnameedt.getText().toString().trim(),
                                      emailedt.getText().toString().trim(),
                                      contactNumberedt.getText().toString().trim(),
                                      passwordedt.getText().toString().trim());
 
+        //Check if validation is true, send data to database
         if(Validation(objPerson.getPersonName(),
                      objPerson.getPersonSurname(),
                      objPerson.getPersonEmail(),
@@ -61,7 +69,7 @@ public class RegisterScreen extends AppCompatActivity {
         finish();
     }
     //*************************************************************
-    public void initialize()
+    private void initialize()
     {
         nameedt = (EditText) findViewById(R.id.edtName);
         surnameedt = (EditText) findViewById(R.id.edtSurname);
@@ -70,7 +78,7 @@ public class RegisterScreen extends AppCompatActivity {
         passwordedt = (EditText) findViewById(R.id.edtPersonPassword);
     }
     //*************************************************************
-    public boolean Validation(String name, String surname, String email , String contact , String password)
+    private boolean Validation(String name, String surname, String email, String contact, String password)
     {
         boolean isValid = true;
 
@@ -137,7 +145,7 @@ public class RegisterScreen extends AppCompatActivity {
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
 
-                //Write the data/post which is the student number to the url
+                //Write the data/post which contains person information that will be saved to database
                 OutputStream outputStream = urlConnection.getOutputStream();
                 BufferedWriter objWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
                 app_data = URLEncoder.encode("firstname","UTF-8")+"="+URLEncoder.encode(objPerson.getPersonName(),"UTF-8")+"&"+
@@ -151,7 +159,7 @@ public class RegisterScreen extends AppCompatActivity {
                 objWriter.close();
                 outputStream.close();
 
-                //Retrieve the input from the url
+                //Retrieve confirmation if data has been successfully saved or not
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader objReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
                 while ((line = objReader.readLine()) != null) {
@@ -171,6 +179,7 @@ public class RegisterScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s)
         {
+            //Display messages if data has been sent or not
             if (s.trim().equalsIgnoreCase("Successfully added"))
             {
                 Toast.makeText(RegisterScreen.this,"You Are Registered", Toast.LENGTH_SHORT).show();

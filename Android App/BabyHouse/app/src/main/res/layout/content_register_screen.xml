@@ -14,7 +14,6 @@
 
     <!--NestedScrollView Holds linearLayout-->
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/NestedscrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -30,7 +29,6 @@
 
 
             <android.support.v7.widget.CardView
-                android:id="@+id/myCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
@@ -48,7 +46,6 @@
                     android:background="#FFFF"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/txtTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -114,7 +111,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Register"
-                        android:id="@+id/btnRegister"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="48dp"
                         android:background="@color/colorPrimary"

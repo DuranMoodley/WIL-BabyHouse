@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="lalucia.babyhouse.babyhouse.HomeFragmentProcess1">
+    tools:context=".FragHome">
 
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/NestedscrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/app_bar"
@@ -18,7 +17,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <android.support.v7.widget.CardView
-                android:id="@+id/myCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"

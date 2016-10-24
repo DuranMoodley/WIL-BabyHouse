@@ -1,3 +1,10 @@
+/*
+BlogPosts.java
+Sends a blog post to the Online MYSQL Database
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
 
 import android.os.AsyncTask;
@@ -16,21 +23,25 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class BlogPosts extends AppCompatActivity {
 
-    EditText blogHeading;
-    EditText blogBody;
-    Blog objBlog;
+    private EditText blogHeading;
+    private EditText blogBody;
+    private Blog objBlog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog_posts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if(getSupportActionBar()!=null)
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         blogHeading = (EditText) findViewById(R.id.edtHeading);
@@ -39,20 +50,25 @@ public class BlogPosts extends AppCompatActivity {
     //***********************************************************************
     public void btnCreateBlog(View v)
     {
-        objBlog = new Blog(blogHeading.getText().toString(),blogBody.getText().toString());
-        RetrieveFeed objFeed = new RetrieveFeed();
+        //Record the data of the blog and add it the object
+        //Send data to the Dbd
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.US);
+        Date date = new Date();
+        dateFormat.format(date);
+        objBlog = new Blog(blogHeading.getText().toString(),blogBody.getText().toString(),date);
+        SendBlogFeed objFeed = new SendBlogFeed();
         objFeed.execute();
     }
     //***********************************************************************
-    public class RetrieveFeed extends AsyncTask<String, Void, String>
+    public class SendBlogFeed extends AsyncTask<String, Void, String>
     {
         //********************************************************************************
         @Override
         protected String doInBackground(String... params) {
-            String line = "";
-            String entireLine = "";
-            String app_data = "";
-            HttpURLConnection urlConnection = null;
+            String line;
+            String entireLine = "Nothing";
+            String app_data;
+            HttpURLConnection urlConnection;
             try {
                 //Create connection to the url
                 URL url = new URL("http://www.babyhouse.dx.am/blogAndroid.php");
@@ -61,11 +77,12 @@ public class BlogPosts extends AppCompatActivity {
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
 
-                //Write the data/post which is the student number to the url
+                //Write the data/post to the php script containing blog data fields
                 OutputStream outputStream = urlConnection.getOutputStream();
                 BufferedWriter objWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
                 app_data = URLEncoder.encode("bHeading","UTF-8")+"="+URLEncoder.encode(objBlog.getBlogHeading(),"UTF-8") +"&" +
-                           URLEncoder.encode("bBody","UTF-8")+"="+URLEncoder.encode(objBlog.getBlogBody(),"UTF-8");
+                           URLEncoder.encode("bBody","UTF-8")+"="+URLEncoder.encode(objBlog.getBlogBody(),"UTF-8")+"&"+
+                           URLEncoder.encode("date","UTF-8")+"="+URLEncoder.encode(String.valueOf(objBlog.getBlogDate()),"UTF-8");
                 objWriter.write(app_data);
                 objWriter.flush();
                 objWriter.close();
@@ -82,8 +99,6 @@ public class BlogPosts extends AppCompatActivity {
                 inputStream.close();
                 urlConnection.disconnect();
                 return entireLine;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -94,7 +109,14 @@ public class BlogPosts extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s)
         {
-            Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+            if(!s.equalsIgnoreCase("Nothing"))
+            {
+                Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(getApplication(),"Error Occurred. Please Try Again Later!!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

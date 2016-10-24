@@ -1,3 +1,10 @@
+/*
+Login.java
+Allows the user to login, app verifies this by connecting to the MYSQL db and searching for the user
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
 
 import android.content.Context;
@@ -38,9 +45,11 @@ public class Login extends AppCompatActivity {
         setSupportActionBar(toolbar);
         initialize();
 
+        //Checks if the user has logged in before
         myprefs = getSharedPreferences("myPreference",MODE_PRIVATE);
         boolean isLoggedIn = myprefs.getBoolean("isLoggedIn",false);
 
+        //If the user has logged in before, skip screen and go directly to the MainActivity
         if(isLoggedIn)
         {
             Intent newActivity;
@@ -50,7 +59,7 @@ public class Login extends AppCompatActivity {
         }
     }
     //***************************************************
-    public void initialize()
+    private void initialize()
     {
         emailedt = (EditText) findViewById(R.id.edtEmailAddress);
         passwordedt = (EditText) findViewById(R.id.edtPersonPassword);
@@ -58,16 +67,17 @@ public class Login extends AppCompatActivity {
     //***************************************************
     public void loginButtonClick(View v)
     {
+        //Validate fields
         Person objPerson = new Person(emailedt.getText().toString().trim(),passwordedt.getText().toString().trim());
-
         if(Validation(objPerson.getPersonEmail(),objPerson.getPersonPassword()))
         {
             new SendData().execute(objPerson);
         }
     }
     //***************************************************
-    public boolean Validation(String email, String password)
+    private boolean Validation(String email, String password)
     {
+        //Check if fields are empty, show error messages when needed
         boolean isValid = true;
         if(email.isEmpty())
         {
@@ -84,6 +94,7 @@ public class Login extends AppCompatActivity {
     //***************************************************
     public void RegisterLoginButtonClick(View v)
     {
+        //Redirects to the Register screen
         Intent newActivity;
         newActivity = new Intent(Login.this, RegisterScreen.class);
         startActivity(newActivity);
@@ -97,7 +108,8 @@ public class Login extends AppCompatActivity {
     //********************************************************************************
     public class SendData extends AsyncTask<Person, Void, String>
     {
-        int personid;
+        int personid = 0;
+        String isVolunteer;
         @Override
         protected void onPreExecute()
         {
@@ -114,7 +126,6 @@ public class Login extends AppCompatActivity {
             Person objPerson = params[0];
             JSONObject jsonObject;
             JSONArray jsonArray;
-            String persondata = "";
 
             //Create connection to the url
             try {
@@ -124,7 +135,7 @@ public class Login extends AppCompatActivity {
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
 
-                //Write the data/post which is the student number to the url
+                //Write the data/post to the php script containing person data
                 OutputStream outputStream = urlConnection.getOutputStream();
                 BufferedWriter objWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
                 app_data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(objPerson.getPersonEmail(),"UTF-8")+"&"+
@@ -135,43 +146,53 @@ public class Login extends AppCompatActivity {
                 objWriter.close();
                 outputStream.close();
 
+                //Read back information on whether the user exists in the database
                 BufferedReader objread = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 while ((line = objread.readLine()) != null)
                 {
                     entireLine += line;
                 }
 
+                //Break information into the JSON elements
                 jsonObject = new JSONObject(entireLine);
                 jsonArray = jsonObject.optJSONArray("person");
 
+                //Extra pieces of information
                 for(int count = 0 ; count < jsonArray.length();count++)
                 {
                     JSONObject jsonStudentData = jsonArray.getJSONObject(count);
-                    persondata = jsonStudentData.optString("isVolunteer");
+                    isVolunteer = jsonStudentData.optString("isVolunteer");
                     personid =  jsonStudentData.getInt("Person_ID");
-
                 }
                 urlConnection.disconnect();
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-            return persondata;
+            return entireLine;
         }
         //********************************************************************************
         @Override
         protected void onPostExecute(String s)
         {
+            //Put values into share preferences
             SharedPreferences myprefs = getSharedPreferences("myPreference", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = myprefs.edit();
-            editor.putString("isVolunteer", s);
+            editor.putString("isVolunteer", isVolunteer);
             editor.putInt("personId",personid);
-            if(!s.isEmpty())
+
+            //Check if user exists, every user contains an ID
+            if(personid != 0)
             {
+                //Check if the user is volunteer
+                if(isVolunteer.equalsIgnoreCase("Yes"))
+                {
+                    Toast.makeText(Login.this,"Welcome Volunteer",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(Login.this,"Welcome",Toast.LENGTH_SHORT).show();
+                }
                 editor.putBoolean("isLoggedIn",true);
-                Toast.makeText(Login.this,"Welcome",Toast.LENGTH_SHORT).show();
                 Intent newActivity;
                 newActivity = new Intent(Login.this, MainActivity.class);
                 startActivity(newActivity);

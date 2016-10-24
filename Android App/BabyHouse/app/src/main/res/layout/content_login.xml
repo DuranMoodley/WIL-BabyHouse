@@ -11,7 +11,6 @@
 
     <!--NestedScrollView Holds linearLayout-->
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/NestedscrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF">
@@ -22,7 +21,6 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
-                android:id="@+id/myCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
@@ -40,7 +38,6 @@
                     android:background="#FFFF"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/txtTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -72,7 +69,6 @@
                         android:text="Login"
                         android:background="@color/colorPrimary"
                         android:textColor="#FFFFFF"
-                        android:id="@+id/btnLogin"
                         android:onClick="loginButtonClick"/>
                     <Button
                         style="?android:attr/buttonStyleSmall"
@@ -81,7 +77,6 @@
                         android:text="Register"
                         android:background="@color/colorPrimary"
                         android:textColor="#FFFFFF"
-                        android:id="@+id/btnRegister"
                         android:onClick="RegisterLoginButtonClick"/>
 
                 </LinearLayout>

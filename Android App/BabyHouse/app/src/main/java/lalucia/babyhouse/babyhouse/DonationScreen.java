@@ -1,3 +1,10 @@
+/*
+DonationScreen.java
+Object class that contains blog details
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
 
 import android.content.res.Configuration;
@@ -11,6 +18,7 @@ public class DonationScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Checks the screen orientatian and makes the necessary changes to the layouts
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
            setContentView(R.layout.activity_donations_landscape);
@@ -21,6 +29,7 @@ public class DonationScreen extends AppCompatActivity {
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null)
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

@@ -12,7 +12,6 @@
     <fragment
         android:layout_width="150dp"
         android:layout_height="match_parent"
-        android:id="@+id/masterFragment"
         android:name="lalucia.babyhouse.babyhouse.MasterFragmentDonations">
     </fragment>
 

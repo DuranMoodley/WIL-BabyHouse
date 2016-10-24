@@ -1,5 +1,11 @@
+/*
+Person.java
+Contains person data that will be called in other classes
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
-
 
 public class Person {
 
@@ -28,39 +34,20 @@ public class Person {
         return personName;
     }
     //**************************************************************************
-    public void setPersonName(String personName) {
-        this.personName = personName;
-    }
-    //**************************************************************************
     public String getPersonSurname() {
         return personSurname;
-    }
-    //**************************************************************************
-    public void setPersonSurname(String personSurname) {
-        this.personSurname = personSurname;
     }
     //**************************************************************************
     public String getPersonEmail() {
         return personEmail;
     }
     //**************************************************************************
-    public void setPersonEmail(String personEmail) {
-        this.personEmail = personEmail;
-    }
-    //**************************************************************************
     public String getPersonContactNumber() {
         return personContactNumber;
-    }
-    //**************************************************************************
-    public void setPersonContactNumber(String personContactNumber) {
-        this.personContactNumber = personContactNumber;
     }
     //**************************************************************************
     public String getPersonPassword() {
         return personPassword;
     }
     //**************************************************************************
-    public void setPersonPassword(String personPassword) {
-        this.personPassword = personPassword;
-    }
 }

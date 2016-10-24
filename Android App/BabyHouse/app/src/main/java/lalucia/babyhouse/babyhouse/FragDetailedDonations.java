@@ -1,5 +1,11 @@
+/*
+FragDetailedDonations.java
+Shows the Donations details depending on what the user has selected
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
-
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,8 +22,7 @@ import android.widget.TextView;
  */
 public class FragDetailedDonations extends Fragment {
 
-    TextView donationDetailes;
-    private View view;
+    private TextView donationDetailes;
     private ImageView imgzap;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -32,7 +37,7 @@ public class FragDetailedDonations extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_frag_detailed_donations, container, false);
+        View view = inflater.inflate(R.layout.fragment_frag_detailed_donations, container, false);
         donationDetailes = (TextView) view.findViewById(R.id.tvNames);
         imgzap = (ImageView) view.findViewById(R.id.imgZap);
         return view;
@@ -40,6 +45,7 @@ public class FragDetailedDonations extends Fragment {
     //*********************************************************************
     public void getSelectedItem(String name)
     {
+        //Checks what value the user has selected in the master fragment
         if(name.equalsIgnoreCase("ZAPPER"))
         {
             showZapper();
@@ -52,12 +58,14 @@ public class FragDetailedDonations extends Fragment {
     //*********************************************************************
     public void showZapper()
     {
+        //Set images to show if Zapper button is selected on the Master Fragment
         imgzap.setVisibility(View.VISIBLE);
         donationDetailes.setVisibility(View.INVISIBLE);
     }
     //********************************************************************************
-    public void showEft()
+    private void showEft()
     {
+        //Show eft details if the Eft options is Selected in the Master Fragment
         imgzap.setVisibility(View.INVISIBLE);
         donationDetailes.setVisibility(View.VISIBLE);
         FactoryClass objFactory = new FactoryClass(getActivity());

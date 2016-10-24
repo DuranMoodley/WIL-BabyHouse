@@ -1,5 +1,11 @@
+/*
+FragEvents.java
+Displays event details to the user from MYSQL Database
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
-
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,18 +25,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FragEvents extends Fragment
 {
-    private View view;
     private ListView eventlist;
     //*********************************************************
     public FragEvents()
@@ -42,7 +44,7 @@ public class FragEvents extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_frag_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_frag_events, container, false);
         eventlist = (ListView) view.findViewById(R.id.lstEvents);
         new RetrieveEventsListData().execute();
         return view;
@@ -54,11 +56,11 @@ public class FragEvents extends Fragment
         @Override
         protected String doInBackground(String... params)
         {
-            String line = "";
+            String line;
             String entireLine = "";
             JSONObject jsonObject;
             JSONArray jsonArray;
-            HttpURLConnection urlConnection = null;
+            HttpURLConnection urlConnection;
             String eventListData = "";
 
             URL url;
@@ -69,6 +71,7 @@ public class FragEvents extends Fragment
                 urlConnection.setDoInput(true);
                 urlConnection.setDoOutput(true);
 
+                //Retrieve events list from php Script
                 BufferedReader objread = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 while ((line = objread.readLine()) != null) {
                     entireLine += line;
@@ -78,6 +81,7 @@ public class FragEvents extends Fragment
                 jsonObject = new JSONObject(entireLine);
                 jsonArray = jsonObject.optJSONArray("eventslist");
 
+                //Break down each list item into a group and save it into an array list to be display in a ListView
                 for(int count = 0 ; count < jsonArray.length();count++)
                 {
                     JSONObject jsonEventData = jsonArray.getJSONObject(count);
@@ -89,13 +93,7 @@ public class FragEvents extends Fragment
                 objread.close();
                 return eventListData;
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
 

@@ -1,3 +1,10 @@
+/*
+MainActivity.java
+Show the user the main screen containing navigation menu options
+Lecturer : Rajesh Chanderman
+WIL Assessment
+Date Updated : 10/24/16
+ */
 package lalucia.babyhouse.babyhouse;
 
 import android.content.Intent;
@@ -15,13 +22,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    DrawerLayout mDrawerLayout;
-    NavigationView mNavigationView;
-    FragmentManager mFragmentManager;
-    FragmentTransaction mFragmentTransaction;
-    ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
+    private ActionBarDrawerToggle mDrawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +36,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /**
          *Setup the DrawerLayout and NavigationView
          */
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.shitstuff) ;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name,
                 R.string.app_name);
+        if(getSupportActionBar() !=null)
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
@@ -44,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          * Lets inflate the very first fragment
          * Here , we are inflating the TabFragment as the first Fragment
          */
-
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
@@ -76,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.title_activity_help)
         {
-            newActivity = new Intent(MainActivity.this, HelpScreen1.class);
+            newActivity = new Intent(MainActivity.this, HelpInformation.class);
             startActivity(newActivity);
         }
         else if(mDrawerToggle.onOptionsItemSelected(item))
@@ -96,11 +101,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent newActivity = null;
         if (id == R.id.nav_adoption)
         {
-            newActivity = new Intent(MainActivity.this,AdoptionProcess1.class);
+            newActivity = new Intent(MainActivity.this,AdoptionProcess.class);
         }
         else if (id == R.id.nav_volunteer)
         {
-            newActivity = new Intent(MainActivity.this , VolunteerProcess1.class);
+            newActivity = new Intent(MainActivity.this , VolunteerProcess.class);
         }
         else if (id == R.id.nav_donations)
         {
@@ -108,13 +113,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_wishlist)
         {
-            newActivity = new Intent(MainActivity.this, WishListProcess1.class);
+            newActivity = new Intent(MainActivity.this, WishListInformation.class);
         }
         else if (id == R.id.nav_our_events)
         {
-            // newActivity = new Intent(NavigationActivity.this , );
-            Toast.makeText(MainActivity.this,"Under Construction",Toast.LENGTH_LONG).show();
-            return false;
+            newActivity = new Intent(MainActivity.this,Events.class);
         }
         else if (id == R.id.nav_blog)
         {

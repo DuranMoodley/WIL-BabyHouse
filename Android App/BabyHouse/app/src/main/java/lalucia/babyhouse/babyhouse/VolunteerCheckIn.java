@@ -308,7 +308,7 @@ public class VolunteerCheckIn extends AppCompatActivity implements LocationListe
         @Override
         protected String doInBackground(String... params) {
 
-            String entireLine = "";
+            String entireLine = "Nothing";
             String line;
             String app_data;
             HttpURLConnection urlConnection;
@@ -363,15 +363,21 @@ public class VolunteerCheckIn extends AppCompatActivity implements LocationListe
         protected void onPostExecute(String s)
         {
             //Display messages where appropriate
-            if(s.isEmpty())
+            if(!s.isEmpty())
             {
-                Toast.makeText(VolunteerCheckIn.this,"Please Try Again!!!", Toast.LENGTH_LONG).show();
+                if (s.equalsIgnoreCase("Nothing")) {
+                    Toast.makeText(VolunteerCheckIn.this, "Please Try Again!!!", Toast.LENGTH_LONG).show();
+                } else {
+                    //If volunteer ID found, insert the relevant details to database
+                    Toast.makeText(VolunteerCheckIn.this, "Inserting...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
+                    new InsertData().execute(s);
+                }
             }
             else
             {
-                //If volunteer ID found, insert the relevant details to database
-                Toast.makeText(VolunteerCheckIn.this,"Inserting...", Toast.LENGTH_LONG).show();
-                new InsertData().execute(s);
+                Toast.makeText(VolunteerCheckIn.this, R.string.error_message, Toast.LENGTH_LONG).show();
+                Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -426,7 +432,21 @@ public class VolunteerCheckIn extends AppCompatActivity implements LocationListe
         @Override
         protected void onPostExecute(String s)
         {
-            Toast.makeText(VolunteerCheckIn.this,s,Toast.LENGTH_LONG).show();
+            if(!s.isEmpty())
+            {
+                if(s.equalsIgnoreCase("Successfully Updated"))
+                {
+                    Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(VolunteerCheckIn.this, R.string.error_message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
+                }
+            }
+            else{
+                Toast.makeText(VolunteerCheckIn.this, R.string.error_message, Toast.LENGTH_LONG).show();
+                Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
+            }
         }
     }
     //********************************************************************************

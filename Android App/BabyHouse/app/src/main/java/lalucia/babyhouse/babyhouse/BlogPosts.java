@@ -55,11 +55,33 @@ public class BlogPosts extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.US);
         Date date = new Date();
         dateFormat.format(date);
+
         objBlog = new Blog(blogHeading.getText().toString(),blogBody.getText().toString(),date);
-        SendBlogFeed objFeed = new SendBlogFeed();
-        objFeed.execute();
+
+        if(Validation(objBlog.getBlogHeading(),objBlog.getBlogBody()))
+        {
+            SendBlogFeed objFeed = new SendBlogFeed();
+            objFeed.execute();
+        }
     }
     //***********************************************************************
+    private boolean Validation(String heading, String body)
+    {
+        //Check if fields are empty, show error messages when needed
+        boolean isValid = true;
+        if(heading.isEmpty())
+        {
+            isValid = false;
+            Toast.makeText(this,"Please Enter A Heading",Toast.LENGTH_SHORT).show();
+        }
+        else if(body.isEmpty())
+        {
+            isValid = false;
+            Toast.makeText(this,"Please Enter Something in the Body",Toast.LENGTH_SHORT).show();
+        }
+        return isValid;
+    }
+    //***************************************************
     public class SendBlogFeed extends AsyncTask<String, Void, String>
     {
         //********************************************************************************
@@ -92,7 +114,7 @@ public class BlogPosts extends AppCompatActivity {
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader objReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
                 while ((line = objReader.readLine()) != null) {
-                    entireLine += line;
+                    entireLine = line;
                 }
 
                 objReader.close();
@@ -109,13 +131,17 @@ public class BlogPosts extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s)
         {
-            if(!s.equalsIgnoreCase("Nothing"))
+            if(!s.isEmpty())
             {
-                Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+                if (!s.equalsIgnoreCase("Nothing")) {
+                    Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplication(), R.string.error_message, Toast.LENGTH_SHORT).show();
+                }
             }
             else
             {
-                Toast.makeText(getApplication(),"Error Occurred. Please Try Again Later!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), R.string.error_message, Toast.LENGTH_SHORT).show();
             }
         }
     }

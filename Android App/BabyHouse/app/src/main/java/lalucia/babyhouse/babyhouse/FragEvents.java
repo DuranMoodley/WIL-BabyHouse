@@ -7,15 +7,27 @@ Date Updated : 10/24/16
  */
 package lalucia.babyhouse.babyhouse;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +38,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +50,9 @@ import java.util.ArrayList;
 public class FragEvents extends Fragment
 {
     private ListView eventlist;
+    private ViewFlipper viewFlipper;
+    private Animation fadeIn,fadeOut;
+    private ProgressBar eventPrb;
     //*********************************************************
     public FragEvents()
     {
@@ -47,6 +66,19 @@ public class FragEvents extends Fragment
         View view = inflater.inflate(R.layout.fragment_frag_events, container, false);
         eventlist = (ListView) view.findViewById(R.id.lstEvents);
         new RetrieveEventsListData().execute();
+        eventPrb = (ProgressBar) view.findViewById(R.id.prbEvents);
+
+        //animation
+        viewFlipper = (ViewFlipper)view.findViewById(R.id.viewFlipper);
+        fadeIn = AnimationUtils.loadAnimation(getActivity(),R.anim.fade_in);
+        fadeOut = AnimationUtils.loadAnimation(getActivity(),R.anim.fade_out);
+        viewFlipper.setAutoStart(true);
+        viewFlipper.setInAnimation(fadeIn);
+        viewFlipper.setOutAnimation(fadeOut);
+        viewFlipper.setFlipInterval(3500);
+        viewFlipper.startFlipping();
+
+
         return view;
     }
     //*********************************************************
@@ -85,9 +117,10 @@ public class FragEvents extends Fragment
                 for(int count = 0 ; count < jsonArray.length();count++)
                 {
                     JSONObject jsonEventData = jsonArray.getJSONObject(count);
-                    eventListData = "Title :\t" + jsonEventData.optString("event_title") + "\n" +
-                                    "Type of Event:\t" + jsonEventData.optString("event_description") + "\n" +
-                                    "Date:\t" + jsonEventData.optString("event_date");
+                    eventListData = "Title :\t" + jsonEventData.optString("eventTitle") + "\n" +
+                            "Type of Event:\t" + jsonEventData.optString("eventDescription") + "\n" +
+                            "Date:\t" + jsonEventData.optString("eventDate");
+                    //isDateNow(jsonEventData.optString("eventDate"));
                     objListOfEvents.add(eventListData);
                 }
                 objread.close();
@@ -103,14 +136,81 @@ public class FragEvents extends Fragment
         @Override
         protected void onPostExecute(String s)
         {
-            if(s.trim().equalsIgnoreCase("Nothing Returned!!"))
+            SharedPreferences mySharedPref = getActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE);
+            if(!s.isEmpty())
             {
-                Toast.makeText(getActivity(),R.string.error_message,Toast.LENGTH_LONG).show();
+                if (s.trim().equalsIgnoreCase("Nothing Returned!!"))
+                {
+                    Toast.makeText(getActivity(), R.string.error_message, Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, objListOfEvents);
+                    eventlist.setAdapter(arrAdapter);
+                    //Check if notification should be shown
+                    if (mySharedPref.getBoolean("showNotification", false))
+                    {
+                        setNotification();
+                    }
+                }
             }
             else
             {
-                ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, objListOfEvents);
-                eventlist.setAdapter(arrAdapter);
+                Toast.makeText(getActivity(), R.string.error_message, Toast.LENGTH_LONG).show();
+            }
+            eventPrb.setVisibility(View.INVISIBLE);
+        }
+        //**********************************************************************
+        private void setNotification()
+        {
+            //Set Notifcation Properties
+            NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(getActivity());
+            notifyBuilder.setSmallIcon(R.mipmap.ic_launcher);
+            notifyBuilder.setTicker("Baby House Event Today !!!");
+            notifyBuilder.setContentTitle("Baby House La Lucia");
+            notifyBuilder.setContentText("Contact Us or View the Events Screen for More Info...");
+            notifyBuilder.setAutoCancel(true);
+            notifyBuilder.setVibrate(new long[] { 200, 200, 600, 600});
+            notifyBuilder.setLights(Color.RED,50,50);
+
+            //Create back stack for the activity after back button clicked
+            //Adds the intent back to the top of the stack
+            Intent lauchActivity = new Intent(getActivity(), MainActivity.class);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+            stackBuilder.addParentStack(MainActivity.class);
+            stackBuilder.addNextIntent(lauchActivity);
+
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+            notifyBuilder.setContentIntent(resultPendingIntent);
+            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(1,notifyBuilder.build());
+        }
+        //***********************************************************************
+        public void isDateNow(String eventDate)
+        {
+            //Compare the event date with current date
+            //Convert the dates into date object for comparison
+            SharedPreferences mySharedPref = getActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = mySharedPref.edit();
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int year = calendar.get(Calendar.YEAR);
+            Date currDate;
+            Date dateOfEvent;
+            try {
+                currDate = simpleDateFormat.parse(String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day));
+                dateOfEvent = simpleDateFormat.parse(eventDate);
+
+                //If the dates are equal , set the notification preference to true
+                if(currDate.equals(dateOfEvent))
+                {
+                    editor.putBoolean("showNotification",true);
+                    editor.apply();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
     }

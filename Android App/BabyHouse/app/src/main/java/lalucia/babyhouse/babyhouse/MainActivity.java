@@ -7,7 +7,9 @@ Date Updated : 10/24/16
  */
 package lalucia.babyhouse.babyhouse;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -75,13 +77,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         Intent newActivity;
         //noinspection SimplifiableIfStatement
         if (id == R.id.title_activity_help)
+
         {
-            newActivity = new Intent(MainActivity.this, HelpInformation.class);
+
+           newActivity = new Intent(MainActivity.this, HelpInformation.class);
             startActivity(newActivity);
         }
         else if(mDrawerToggle.onOptionsItemSelected(item))
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item)
     {
+        SharedPreferences myprefs = getSharedPreferences("myPreference", Context.MODE_PRIVATE);
         int id = item.getItemId();
 
         Intent newActivity = null;
@@ -105,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_volunteer)
         {
-            newActivity = new Intent(MainActivity.this , VolunteerProcess.class);
+            newActivity = new Intent(MainActivity.this, VolunteerProcess.class);
         }
         else if (id == R.id.nav_donations)
         {
@@ -121,20 +127,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_blog)
         {
-            newActivity = new Intent(MainActivity.this , BlogPosts.class);
+            if(myprefs.getString("isVolunteer","yes").equalsIgnoreCase("yes"))
+            {
+                newActivity = new Intent(MainActivity.this, BlogPosts.class);
+            }
+            else{
+                Toast.makeText(this, "Sorry you don't have the right Permissions for this Option.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
         else if(id == R.id.nav_our_team)
         {
-            Toast.makeText(MainActivity.this,"Under Construction",Toast.LENGTH_LONG).show();
-            return false;
+            newActivity = new Intent(MainActivity.this, OurStaff.class);
         }
         else if(id == R.id.nav_contact_us)
         {
-            newActivity = new Intent(MainActivity.this , BabyHouseMap.class);
+            newActivity = new Intent(MainActivity.this , ContactProcess.class);
         }
         else if(id == R.id.nav_checkin)
         {
-            newActivity = new Intent(MainActivity.this , VolunteerCheckIn.class);
+            if(myprefs.getString("isVolunteer","yes").equalsIgnoreCase("yes"))
+            {
+                newActivity = new Intent(MainActivity.this, VolunteerCheckIn.class);
+            }
+            else{
+                Toast.makeText(this, "Sorry you don't have the right Permissions for this Option.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        else if(id == R.id.nav_gallery)
+        {
+            newActivity = new Intent(MainActivity.this , Gallery.class);
         }
         startActivity(newActivity);
 

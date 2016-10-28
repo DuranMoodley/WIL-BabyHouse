@@ -10,22 +10,27 @@
     <string name="title_activity_wish_list">WishList</string>
     <string name="title_activity_register_screen">Register</string>
     <string name="title_activity_donation_screen">Donations</string>
-    <string name="error_message">Sorry, A problem has occurred. Please Restart Application.</string>
+    <string name="error_message">Sorry, A problem has occurred. Please check your Internet/Wifi connection.
+                                If the Problem persists, please reinstall the application</string>
     <string name="error_message_empty_name">Please Enter in Your Name</string>
     <string name="error_message_empty_surname">Please Enter in Your Surname</string>
     <string name="error_message_empty_email">Please Enter in Your Email Address</string>
     <string name="error_message_empty_contactnumber">Please Enter in Your Contact Number</string>
     <string name="error_message_empty_password">Please Enter in a Password</string>
     <string name="error_message_empty_contactnumber_small">Contact Number must be 10 Digits</string>
-    <string name="HomeFragmentContent">The LaLucia Baby House is a transitional home for abandoned babies. But we are much more than an orphanage. We are all about adoption! Our role is to love and care for the babies and prepare them for their forever families. Our goal is that they are with their new families before their first birthday.
+    <string name="HomeFragmentContent">\nThe LaLucia Baby House is a transitional home for abandoned babies. But we are much more than an orphanage. We are all about adoption! Our role is to love and care for the babies and prepare them for their forever families. Our goal is that they are with their new families before their first birthday.
     All of our babies come to us through the Adoption Team at Durban Child Welfare. Each baby has it’s own social worker who is working to match them with adoptive families.
 
-We can take up to 6 babies at a time and most of them are under 1 year of age. We have an experienced, hardworking group of care-givers who care for the babies 24 hours a day</string>
+We can take up to 6 babies at a time and most of them are under 1 year of age. We have an experienced, hardworking group of care-givers who care for the babies 24 hours a day \n \n \n \n</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_donations_landscape">DonationsLandscape</string>
     <string name="title_activity_donation_detail">Donation Information</string>
 
     <string name="title_activity_maps">Contact Us</string>
     <string name="title_activity_baby_house_map">Map</string>
-    <string name="title_activity_volunteer_check_in">VolunteerCheckIn</string>
+    <string name="title_activity_volunteer_check_in">Check In</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_our_staff">Our Team</string>
+    <string name="title_activity_gallery">Gallery</string>
+    <string name="title_activity_contact_process">Contact Us</string>
 </resources>

@@ -139,7 +139,7 @@ public class Login extends AppCompatActivity {
                 OutputStream outputStream = urlConnection.getOutputStream();
                 BufferedWriter objWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
                 app_data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(objPerson.getPersonEmail(),"UTF-8")+"&"+
-                        URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(objPerson.getPersonPassword(),"UTF-8");
+                        URLEncoder.encode("Password","UTF-8")+"="+URLEncoder.encode(objPerson.getPersonPassword(),"UTF-8");
 
                 objWriter.write(app_data);
                 objWriter.flush();
@@ -162,7 +162,7 @@ public class Login extends AppCompatActivity {
                 {
                     JSONObject jsonStudentData = jsonArray.getJSONObject(count);
                     isVolunteer = jsonStudentData.optString("isVolunteer");
-                    personid =  jsonStudentData.getInt("Person_ID");
+                    personid =  jsonStudentData.getInt("personID");
                 }
                 urlConnection.disconnect();
 
@@ -182,25 +182,26 @@ public class Login extends AppCompatActivity {
             editor.putInt("personId",personid);
 
             //Check if user exists, every user contains an ID
-            if(personid != 0)
+            if(!s.isEmpty())
             {
-                //Check if the user is volunteer
-                if(isVolunteer.equalsIgnoreCase("Yes"))
-                {
-                    Toast.makeText(Login.this,"Welcome Volunteer",Toast.LENGTH_SHORT).show();
+                if (personid != 0) {
+                    //Check if the user is volunteer
+                    if (isVolunteer.equalsIgnoreCase("Yes")) {
+                        Toast.makeText(Login.this, "Welcome Volunteer", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Login.this, "Welcome", Toast.LENGTH_SHORT).show();
+                    }
+                    editor.putBoolean("isLoggedIn", true);
+                    Intent newActivity;
+                    newActivity = new Intent(Login.this, MainActivity.class);
+                    startActivity(newActivity);
+                    finish();
+                } else {
+                    Toast.makeText(Login.this, s + "Login Unsuccessful. Please Try Again.\nPlease Check your Internet/Wifi connect", Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    Toast.makeText(Login.this,"Welcome",Toast.LENGTH_SHORT).show();
-                }
-                editor.putBoolean("isLoggedIn",true);
-                Intent newActivity;
-                newActivity = new Intent(Login.this, MainActivity.class);
-                startActivity(newActivity);
-                finish();
             }
-            else
-            {
-                Toast.makeText(Login.this,s + "Login Unsuccessful. Please Try Again",Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(Login.this, s + "Login Unsuccessful. Please Try Again.\nPlease Check your Internet/Wifi connect", Toast.LENGTH_SHORT).show();
             }
             editor.apply();
         }

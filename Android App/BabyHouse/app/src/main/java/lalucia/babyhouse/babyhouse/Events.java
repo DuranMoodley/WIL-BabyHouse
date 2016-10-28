@@ -19,8 +19,10 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -41,6 +43,7 @@ import java.util.Date;
 public class Events extends AppCompatActivity {
 
     private ListView eventlist;
+    private ProgressBar eventPrb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class Events extends AppCompatActivity {
         if(getSupportActionBar() !=null)
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         eventlist = (ListView) findViewById(R.id.lstEventsList);
+        eventPrb = (ProgressBar) findViewById(R.id.prbEvents);
         new RetrieveEventsListData().execute();
     }
     //*********************************************************
@@ -88,10 +92,10 @@ public class Events extends AppCompatActivity {
                 for(int count = 0 ; count < jsonArray.length();count++)
                 {
                     JSONObject jsonEventData = jsonArray.getJSONObject(count);
-                    eventListData = "Title :\t" + jsonEventData.optString("event_title") + "\n" +
-                            "Type of Event:\t" + jsonEventData.optString("event_description") + "\n" +
-                            "Date:\t" + jsonEventData.optString("event_date");
-                    isDateNow("2016-10-25");
+                    eventListData = "Title :\t" + jsonEventData.optString("eventTitle") + "\n" +
+                            "Type of Event:\t" + jsonEventData.optString("eventDescription") + "\n" +
+                            "Date:\t" + jsonEventData.optString("eventDate");
+                    isDateNow(jsonEventData.optString("eventDate"));
                     objListOfEvents.add(eventListData);
                 }
                 objread.close();
@@ -110,20 +114,25 @@ public class Events extends AppCompatActivity {
         protected void onPostExecute(String s)
         {
             SharedPreferences mySharedPref = getSharedPreferences("myPreference", Context.MODE_PRIVATE);
-            if(s.trim().equalsIgnoreCase("Nothing Returned!!"))
+
+            if(!s.isEmpty())
             {
-                Toast.makeText(Events.this,R.string.error_message,Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(Events.this, android.R.layout.simple_list_item_1, objListOfEvents);
-                eventlist.setAdapter(arrAdapter);
-                //Check if notification should be shown
-                if(mySharedPref.getBoolean("showNotification",false))
-                {
-                    setNotification();
+                if (s.trim().equalsIgnoreCase("Nothing Returned!!")) {
+                    Toast.makeText(Events.this, R.string.error_message, Toast.LENGTH_LONG).show();
+                } else {
+                    ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(Events.this, android.R.layout.simple_list_item_1, objListOfEvents);
+                    eventlist.setAdapter(arrAdapter);
+                    //Check if notification should be shown
+                    if (mySharedPref.getBoolean("showNotification", false))
+                    {
+                        setNotification();
+                    }
                 }
             }
+            else{
+                Toast.makeText(Events.this, R.string.error_message, Toast.LENGTH_LONG).show();
+            }
+            eventPrb.setVisibility(View.INVISIBLE);
         }
         //**********************************************************************
         private void setNotification()

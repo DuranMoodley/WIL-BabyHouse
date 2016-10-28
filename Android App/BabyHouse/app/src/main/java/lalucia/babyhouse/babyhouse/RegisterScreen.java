@@ -180,16 +180,19 @@ public class RegisterScreen extends AppCompatActivity {
         protected void onPostExecute(String s)
         {
             //Display messages if data has been sent or not
-            if (s.trim().equalsIgnoreCase("Successfully added"))
+            if(!s.isEmpty())
             {
-                Toast.makeText(RegisterScreen.this,"You Are Registered", Toast.LENGTH_SHORT).show();
-                Intent newActivity;
-                newActivity = new Intent(RegisterScreen.this, Login.class);
-                startActivity(newActivity);
-                finish();
+                if (s.trim().equalsIgnoreCase("Successfully added")) {
+                    Toast.makeText(RegisterScreen.this, "You Are Registered", Toast.LENGTH_SHORT).show();
+                    Intent newActivity;
+                    newActivity = new Intent(RegisterScreen.this, Login.class);
+                    startActivity(newActivity);
+                    finish();
+                } else {
+                    Toast.makeText(RegisterScreen.this, R.string.error_message, Toast.LENGTH_SHORT).show();
+                }
             }
-            else
-            {
+            else {
                 Toast.makeText(RegisterScreen.this, R.string.error_message, Toast.LENGTH_SHORT).show();
             }
         }

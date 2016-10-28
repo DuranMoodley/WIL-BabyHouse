@@ -39,7 +39,7 @@ public class HelpInformation extends AppCompatActivity {
                 @Override
                 public void onClick(View view)
                 {
-                    Intent newAct = new Intent(HelpInformation.this,BabyHouseMap.class);
+                    Intent newAct = new Intent(HelpInformation.this,ContactProcess.class);
                     startActivity(newAct);
                 }
             });

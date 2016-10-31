@@ -139,10 +139,10 @@ public class Events extends AppCompatActivity {
         {
             //Set Notifcation Properties
             NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(Events.this);
-            notifyBuilder.setSmallIcon(R.mipmap.ic_launcher);
+            notifyBuilder.setSmallIcon(R.drawable.babyhouseicon);
             notifyBuilder.setTicker("Baby House Event Today !!!");
-            notifyBuilder.setContentTitle("Baby House La Lucia");
-            notifyBuilder.setContentText("Contact Us or View the Events Screen for More Info...");
+            notifyBuilder.setContentTitle("Baby House La Lucia Event");
+            notifyBuilder.setContentText("Contact Us or Events Screen for More Info...");
             notifyBuilder.setAutoCancel(true);
             notifyBuilder.setVibrate(new long[] { 200, 200, 600, 600});
             notifyBuilder.setLights(Color.RED,50,50);

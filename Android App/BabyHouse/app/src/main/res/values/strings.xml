@@ -33,4 +33,5 @@ We can take up to 6 babies at a time and most of them are under 1 year of age. W
     <string name="title_activity_our_staff">Our Team</string>
     <string name="title_activity_gallery">Gallery</string>
     <string name="title_activity_contact_process">Contact Us</string>
+    <string name="Check_in_request">Please Enter In Check-In and Check-Out times before leaving the premises:</string>
 </resources>

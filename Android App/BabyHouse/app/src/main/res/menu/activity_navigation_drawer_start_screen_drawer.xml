@@ -20,6 +20,15 @@
                     android:id="@+id/nav_gallery"
                     android:icon="@mipmap/gallery"
                     android:title="Gallery" />
+                <item
+                android:id="@+id/nav_blog"
+                android:icon="@mipmap/blogg"
+                android:title="@string/title_activity_blog_posts" />
+                <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="@string/title_activity_maps" />
+
             </menu>
         </item>
     </group>
@@ -40,24 +49,14 @@
                 android:title="@string/title_activity_events" />
         </menu>
     </item>
-    <item android:title="Volunteer">
+    <item android:title="Volunteer Check-In">
         <menu>
-            <item
-                android:id="@+id/nav_blog"
-                android:icon="@mipmap/blogg"
-                android:title="@string/title_activity_blog_posts" />
+
             <item
                 android:id="@+id/nav_checkin"
                 android:icon="@mipmap/checkin"
                 android:title="@string/title_activity_staff_check_in" />
         </menu>
     </item>
-    <item android:title="Contact Us">
-        <menu>
-            <item
-                android:id="@+id/nav_contact_us"
-                android:icon="@mipmap/phonefab"
-                android:title="@string/title_activity_maps" />
-        </menu>
-    </item>
+
 </menu>

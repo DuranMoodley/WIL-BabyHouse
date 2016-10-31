@@ -29,41 +29,50 @@
         <activity
             android:name=".BlogPosts"
             android:label="@string/title_activity_blog_posts"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegisterScreen"
             android:label="@string/title_activity_register_screen"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DonationScreen"
             android:configChanges="orientation"
             android:label="@string/title_activity_donation_screen"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DonationsLandscape"
             android:label="@string/title_activity_donations_landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DonationDetail"
             android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_donation_detail"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AdoptionProcess"
             android:label="@string/title_activity_adoption"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HelpInformation"
             android:label="@string/title_activity_help"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VolunteerProcess"
             android:label="@string/title_activity_volunteer"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -75,6 +84,7 @@
         <activity
             android:name=".WishListInformation"
             android:label="@string/title_activity_wish_list"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -95,11 +105,13 @@
         <activity
             android:name=".VolunteerCheckIn"
             android:label="@string/title_activity_volunteer_check_in"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Events"
             android:label="@string/title_activity_events"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <service
@@ -109,16 +121,19 @@
         <activity
             android:name=".ContactProcess"
             android:label="@string/title_activity_contact_process"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OurStaff"
             android:label="@string/title_activity_our_staff"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Gallery"
             android:label="@string/title_activity_gallery"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
         </activity>

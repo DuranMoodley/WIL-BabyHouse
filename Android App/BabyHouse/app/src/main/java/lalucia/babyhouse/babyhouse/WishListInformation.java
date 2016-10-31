@@ -29,8 +29,8 @@ public class WishListInformation extends AppCompatActivity {
         if(getSupportActionBar() != null)
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         greatestNeeds = (ListView) findViewById(R.id.lstGreatestNeeds);
-        babyConsumables = (ListView) findViewById(R.id.lstBabyConsumables);
-        cares = (ListView) findViewById(R.id.lstCarers);
+        //babyConsumables = (ListView) findViewById(R.id.lstBabyConsumables);
+        //cares = (ListView) findViewById(R.id.lstCarers);
         showListItems();
     }
     //************************************************************************
@@ -44,6 +44,7 @@ public class WishListInformation extends AppCompatActivity {
         ArrayAdapter<String> arrNeedsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,objNeeds);
         greatestNeeds.setAdapter(arrNeedsAdapter);
 
+        /*
         needsItems =  objFactory.readDate("babyconsumables");
         ArrayList objbaby = new ArrayList();
         objbaby.add(needsItems);
@@ -55,5 +56,6 @@ public class WishListInformation extends AppCompatActivity {
         objcares.add(needsItems);
         ArrayAdapter<String> arrCaresAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,objcares);
         cares.setAdapter(arrCaresAdapter);
+        */
     }
 }

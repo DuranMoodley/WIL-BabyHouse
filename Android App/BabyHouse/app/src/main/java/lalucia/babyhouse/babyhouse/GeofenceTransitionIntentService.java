@@ -41,12 +41,12 @@ public class GeofenceTransitionIntentService extends IntentService
             if(transition == Geofence.GEOFENCE_TRANSITION_ENTER)
             {
                 transitionType = "Welcome to Baby House La Lucia";
-                sendNotification(transitionType);
+                //sendNotification(transitionType);
             }
             else if(transition == Geofence.GEOFENCE_TRANSITION_EXIT)
             {
                 transitionType = "You Have Exited";
-                sendNotification(transitionType);
+                //sendNotification(transitionType);
             }
         }
     }
@@ -60,7 +60,7 @@ public class GeofenceTransitionIntentService extends IntentService
                 .setContentText(notificationDescription)
                 .setAutoCancel(true)
                 .setVibrate(new long[] { 200, 200, 600, 600, 600, 200, 200,})
-                .setSmallIcon(R.mipmap.ic_launcher);
+                .setSmallIcon(R.drawable.babyhouseicon);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0,builder.build());

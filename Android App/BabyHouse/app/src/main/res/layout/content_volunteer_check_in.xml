@@ -11,7 +11,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
         android:layout_margin="5dp"
         android:elevation="10dp"
@@ -23,14 +23,12 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/zapper" />
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logo2"
+                />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Cute saying for the babyhouse" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -47,11 +45,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Check_in_request"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
+
             <EditText
                 android:id="@+id/edtCheckInTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="51dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:ems="10"
                 android:hint="Check In Time"
                 android:inputType="none" />
@@ -60,6 +68,8 @@
                 android:id="@+id/edtCheckOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:ems="10"
                 android:hint="Check Out Time"
                 android:inputType="none" />
@@ -69,6 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="43dp"
                 android:onClick="saveCheckinTime"
+                android:background="@color/material_blue_grey_800"
+                android:textColor="#FFF"
                 android:text="Save" />
 
         </LinearLayout>

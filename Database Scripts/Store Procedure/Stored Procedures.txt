@@ -1,0 +1,61 @@
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `addBaby`(IN `babyGender` VARCHAR(30), IN `babyRace` VARCHAR(30), IN `dateArrived` DATE, IN `dateExited` DATE, IN `babyStatus` VARCHAR(35), IN `personId` INT(11))
+    NO SQL
+INSERT INTO tbl_baby (tbl_baby.babyGender,tbl_baby.babyRace,tbl_baby.dateArrived,tbl_baby.dateExited,tbl_baby.babyStatus,tbl_baby.personID) VALUES (babyGender, babyRace,dateArrived,dateExited,babyStatus,personId)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `getVolunteerId`(IN `personId` VARCHAR(10))
+    NO SQL
+SELECT tbl_volunteer.volunteerID FROM tbl_volunteer
+WHERE tbl_volunteer.PersonID = personId$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `loginUser`(IN `password` VARCHAR(30), IN `emailAddress` VARCHAR(30))
+    NO SQL
+SELECT * FROM tbl_people WHERE personPassword = password AND personEmail = emailAddress$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `updateBaby`(IN `gender` VARCHAR(10), IN `race` VARCHAR(30), IN `dateArrived` DATE, IN `dateExited` DATE, IN `status` VARCHAR(30), IN `personId` INT(11))
+    NO SQL
+UPDATE tbl_baby SET tbl_baby.babyGender = gender , tbl_baby.babyRace = race, tbl_baby.dateArrived = dateArrived , tbl_baby.dateExited = dateExited , tbl_baby.babyStatus = status WHERE tbl_baby.personID = personId$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `updateVolunteer`(IN `imageId` BLOB, IN `personId` INT(11))
+    NO SQL
+UPDATE tbl_volunteer SET tbl_volunteer.imageID = imageId WHERE tbl_volunteer.PersonID = personId$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `addPerson`(IN `pFname` VARCHAR(30), IN `pLname` VARCHAR(30), IN `pEmail` VARCHAR(30), IN `pContactNumber` VARCHAR(11), IN `pPassword` VARCHAR(30))
+    NO SQL
+INSERT INTO tbl_people(tbl_people.personFName,tbl_people.personLName,tbl_people.personEmail,tbl_people.personContact,tbl_people.personPassword) VALUES(pFname,pLname,pEmail,pContactNumber,pPassword)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `addVolunterCheckInTimes`(IN `checkin` TIME, IN `checkout` TIME, IN `volId` INT(11), IN `date` VARCHAR(10), IN `timeWorked` INT(10))
+    NO SQL
+INSERT INTO tbl_volunteer_attendance(tbl_volunteer_attendance.checkInTime,tbl_volunteer_attendance.checkOutTime,tbl_volunteer_attendance.volunteerID,tbl_volunteer_attendance.checkInDate,tbl_volunteer_attendance.amountOfTimeWorked)
+VALUES(checkin,checkout,volId,date,timeWorked)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `getEvents`()
+    NO SQL
+Select * From tbl_event$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `addVolunteer`(IN `imageID` BLOB, IN `personID` INT(11))
+    NO SQL
+INSERT INTO tbl_volunteer (tbl_volunteer.imageID,tbl_volunteer.PersonID) VALUES (imageID,personID)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`2104299_test`@`%` PROCEDURE `wishListData`()
+    NO SQL
+SELECT * FROM tbl_wishlist$$
+DELIMITER ;

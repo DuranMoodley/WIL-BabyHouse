@@ -25,6 +25,8 @@ public class DonationDetail extends AppCompatActivity {
         setContentView(R.layout.activity_donation_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //---if the user switches to landscape mode; destroy the activity---
         if (getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE)

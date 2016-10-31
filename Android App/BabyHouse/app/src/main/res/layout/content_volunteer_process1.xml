@@ -89,7 +89,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="\n To get the Volunteer Application click the download button on the top right"
+                        android:text="\n To get the Volunteer Application click the download button on the top right to go to our web page"
                         android:textStyle="italic"
 
                         />

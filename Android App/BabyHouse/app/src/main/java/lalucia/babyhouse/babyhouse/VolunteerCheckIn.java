@@ -337,7 +337,7 @@ public class VolunteerCheckIn extends AppCompatActivity implements LocationListe
                 BufferedReader objread = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 while ((line = objread.readLine()) != null)
                 {
-                    entireLine += line;
+                    entireLine = line;
                 }
 
                 //Read JSON fields
@@ -370,7 +370,6 @@ public class VolunteerCheckIn extends AppCompatActivity implements LocationListe
                 } else {
                     //If volunteer ID found, insert the relevant details to database
                     Toast.makeText(VolunteerCheckIn.this, "Inserting...", Toast.LENGTH_LONG).show();
-                    Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
                     new InsertData().execute(s);
                 }
             }
@@ -440,12 +439,10 @@ public class VolunteerCheckIn extends AppCompatActivity implements LocationListe
                 }
                 else{
                     Toast.makeText(VolunteerCheckIn.this, R.string.error_message, Toast.LENGTH_LONG).show();
-                    Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
                 }
             }
             else{
                 Toast.makeText(VolunteerCheckIn.this, R.string.error_message, Toast.LENGTH_LONG).show();
-                Toast.makeText(VolunteerCheckIn.this, s, Toast.LENGTH_LONG).show();
             }
         }
     }

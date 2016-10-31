@@ -67,7 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Login"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/material_blue_grey_800"
                         android:textColor="#FFFFFF"
                         android:onClick="loginButtonClick"/>
                     <Button
@@ -75,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Register"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/material_blue_grey_800"
                         android:textColor="#FFFFFF"
                         android:onClick="RegisterLoginButtonClick"/>
 
